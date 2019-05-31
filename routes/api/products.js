@@ -3,6 +3,10 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+const crypto = require('crypto');
 
 //Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -14,6 +18,43 @@ const User = require("../../models/User");
 
 // Load Product Model
 const Product = require("../../models/Products");
+
+
+// create storage
+// const storage = new GridFsStorage({
+//   url: keys.mongoDBUrl,
+//   file: (req, file) => {
+//     return new Promise((resolve, reject) => {
+//       crypto.randomBytes(16, (err, buf) => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         const filename = buf.toString("hex") + path.extname(file.originalname);
+//         const fileInfo = {
+//           filename: filename,
+//           bucketName: "uploads"
+//         };
+//         resolve(fileInfo)
+//       });
+//     });
+//   }
+// });
+// const upload = multer({ storage })
+
+
+
+
+//@route GET api/products
+// @desc get all products listed
+
+router.get('/', (req, res) => {
+  Product.find()
+    .sort({date: -1})
+    .then(products => res.json(products))
+    .catch(err => res.status(404).json({
+      error: "No listed items"
+    }));
+});
 
 //@route POST api/products/register
 //@desc Register new users

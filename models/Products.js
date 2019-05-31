@@ -25,6 +25,12 @@ const ProductSchema = new Schema({
     description: {
         type: String
     },
+
+    img: {
+        data: Buffer,
+        contentType: String
+    },
+
     date: {
         type: Date,
         default: Date.now
