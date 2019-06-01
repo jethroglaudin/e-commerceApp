@@ -24,7 +24,7 @@ module.exports = function validateRegisterInput(data) {
   if (Validator.isEmpty(data.email)) {
     errors.email = "Email field is required";
   } else if (!Validator.isEmail(data.email)) {
-    erros.email = "Email is invalid";
+    errors.email = "Email is invalid";
   }
   //Password Checs
   if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
