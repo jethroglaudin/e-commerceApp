@@ -4,12 +4,9 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const keys = require("./config/keys");
 const port = process.env.Port || 5000;
-const product = require("./routes/api/Products");
-const multer = require("multer");
-const GridFsStorage = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
-const methodOveride = require('method-override');
-const crypto = require("crypto");
+const product = require("./routes/api/products");
+const users = require("./routes/api/users");
+
 
 const app = express();
 
@@ -32,7 +29,9 @@ mongoose.connect(keys.mongoDBUrl, { useNewUrlParser: true }).then(() => {
 app.use(passport.initialize());
 //Passport config
 require("./config/passport")(passport);
+app.use("/api/users", users);
 app.use("/api/products", product);
+
 
 app.listen(port, err => {
   if (err) throw err;
