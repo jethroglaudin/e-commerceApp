@@ -1,19 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
+const passport = require("passport");
 const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 //Load input validation
 const validateProductInput = require("../../validation/productValidation");
 
 // Load Product Model
 const Product = require("../../models/Products");
-
 
 // create storage
 // const storage = new GridFsStorage({
@@ -36,19 +33,18 @@ const Product = require("../../models/Products");
 // });
 // const upload = multer({ storage })
 
-
-
-
 //@route GET api/products
 // @desc get all products listed
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   Product.find()
-    .sort({date: -1})
+    .sort({ date: -1 })
     .then(products => res.json(products))
-    .catch(err => res.status(404).json({
-      error: "No listed items"
-    }));
+    .catch(err =>
+      res.status(404).json({
+        error: "No listed items"
+      })
+    );
 });
 
 // @route GET api/products/name
@@ -74,7 +70,7 @@ router.get("/name", (req, res) => {
     );
 });
 
-// @route GET api/products/
+// @route POST api/products/
 // @desc Search by ProductName
 // Create new user Route
 router.post("/", (req, res) => {
@@ -96,5 +92,18 @@ router.post("/", (req, res) => {
     res.json(product);
   });
 });
+
+// @route DELETE api/products:id
+// @desc  Delete Product
+// @access Private
+router.delete(
+  "/:_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Product.findById(req.params._id)
+      .then(product => product.remove().then(() => res.json({ sucess: true })))
+      .catch(err => res.status(404).json({ success: false }));
+  }
+);
 
 module.exports = router;
