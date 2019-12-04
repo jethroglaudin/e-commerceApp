@@ -7,7 +7,6 @@ const port = process.env.Port || 5000;
 const product = require("./routes/api/products");
 const users = require("./routes/api/users");
 
-
 const app = express();
 
 //Middleware BodyParser
@@ -18,12 +17,15 @@ app.use(bodyParser.json());
 
 // connect to MongoDB Atlas
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoDBUrl, { useNewUrlParser: true }).then(() => {
-  console.log(`MongoDB connected`);
-});
-
-
-
+mongoose
+  .connect(
+    keys.mongoDBUrl,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => {
+    console.log(`MongoDB connected`);
+  })
+  .catch(err => console.log(err));
 
 //Passport middleware
 app.use(passport.initialize());
@@ -31,7 +33,6 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/products", product);
-
 
 app.listen(port, err => {
   if (err) throw err;
