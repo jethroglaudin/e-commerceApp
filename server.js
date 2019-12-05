@@ -7,8 +7,13 @@ const port = process.env.Port || 5000;
 const product = require("./routes/api/products");
 const users = require("./routes/api/users");
 const chalk = require("chalk");
+const cors = require("cors");
+
 
 const app = express();
+// Initialize cors
+app.use(cors());
+
 
 //Middleware BodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
