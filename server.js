@@ -12,6 +12,7 @@ const cors = require("cors");
 
 const app = express();
 // Initialize cors
+// Allow cross origin
 app.use(cors());
 
 
