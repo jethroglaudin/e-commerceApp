@@ -52,11 +52,22 @@ class Navbar extends Component {
     );
 
     const unAuthenticatedNav = (
-      <ul className="">
-        <nav>
-          <li>Time</li>
-        </nav>
-      </ul>
+       <div className="navbar-fixed">
+        <nav className="z-depth-3">
+          <li className="nav-wrapper white">
+            <Link
+              to="/"
+              style={{
+                fontFamily: "monospace"
+              }}
+              className="col s5 brand-logo center black-text"
+            >
+              <i className="material-icons">shop</i>
+              Shop-It
+            </Link>
+          </li>
+          </nav>   
+      </div>
     );
 
     return (
