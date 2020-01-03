@@ -14,8 +14,8 @@ class Navbar extends Component {
     const { isAuthenticated, user } = this.props.auth;
 
     const authenticatedNav = (
-      <div className="navbar-fixed">
-        <nav className="z-depth-3">
+      <nav className="navbar-fixed">
+        <div className="z-depth-1">
           <li className="nav-wrapper white">
             <Link
               to="/"
@@ -27,9 +27,7 @@ class Navbar extends Component {
               <i className="material-icons">shop</i>
               Shop-It
             </Link>
-          </li>
-
-          <div className="row">
+            <div className="row">
             <div className="col s12">
               <ul className="tabs">
                 <li className="tab col s3">
@@ -47,8 +45,12 @@ class Navbar extends Component {
               </ul>
             </div>
           </div>
-        </nav>
-      </div>
+          </li>
+          
+
+          
+        </div>
+      </nav>
     );
 
     const unAuthenticatedNav = (
@@ -71,7 +73,7 @@ class Navbar extends Component {
     );
 
     return (
-      <div className="navbar-fixed">
+      <div className="">
         {isAuthenticated ? authenticatedNav : unAuthenticatedNav}
       </div>
     );
