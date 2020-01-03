@@ -12,7 +12,7 @@ class ShopIt extends Component {
     this.props.logoutUser();
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getProducts()
   }
 
