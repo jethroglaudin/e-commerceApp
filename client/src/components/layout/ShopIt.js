@@ -5,7 +5,6 @@ import { logoutUser } from "../../actions/authActions";
 import { getProducts } from "../../actions/productActions";
 import { Link } from "react-router-dom";
 
-
 class ShopIt extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -13,43 +12,38 @@ class ShopIt extends Component {
   };
 
   componentDidMount() {
-    this.props.getProducts()
+    this.props.getProducts();
   }
 
   getAllProducts = () => {
     this.props.getProducts();
-    console.log(this.props.product)
-
-  }
+    console.log(this.props.product);
+  };
 
   render() {
     const { user } = this.props.auth;
     const { products } = this.props.product;
     // const { errors } = this.props.errors;
     return (
-      <div className="container">
-      {/* <div className="Load" onLoad={this.getAllProducts()} /> */}
-        <div class="row">
-          <div class="col s12">
-            <ul class="tabs">              
-              <li class="tab col s3"><a href="#test4">Buy Product</a></li>
-              <li class="tab col s3"><Link
-          to="/Post">Sell Product</Link></li>
-             <li class="tab col s3"><b>Hey there,</b> {user.name.split(" ")[0]}</li>
-             <li onClick={this.onLogoutClick} class="tab col s3"><a href="#test3">Logout</a></li>
-            </ul>
+      <div className="row">
+        <div className="col s12 m2">
+          <div className="card">
+            <div className="card-image">
+              <Link to href="#">
+                <img  
+                  src="https://place-hold.it/100x100"
+                  alt=""
+                />
+              </Link>
+            </div>
+
+            <div className="card-content">
+              <h4 className="card-title">
+                <Link to="#">Item One</Link>
+              </h4>
+            </div>
           </div>
         </div>
-     
-       
-        {products.map(({ _id, productName, description, price }) => (
-              <p>{productName}</p>  
-             ))}
-      
-
-        
-        
-
       </div>
     );
   }
@@ -67,7 +61,4 @@ const mapStateToProps = state => ({
   product: state.product
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser, getProducts }
-)(ShopIt);
+export default connect(mapStateToProps, { logoutUser, getProducts })(ShopIt);
