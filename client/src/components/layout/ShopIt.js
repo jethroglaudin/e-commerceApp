@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import { getProducts } from "../../actions/productActions";
 import { Link } from "react-router-dom";
 import  ProductFeed  from './ProductFeed';
+import ProductItem from "./ProductItem";
 
 class ShopIt extends Component {
   onLogoutClick = e => {
