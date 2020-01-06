@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ProductItem from "./ProductItem";
 
+
 class ProductFeed extends Component {
   render() {
     const { item } = this.props;
