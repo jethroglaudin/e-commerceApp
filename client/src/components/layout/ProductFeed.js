@@ -1,17 +1,18 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import ShopIt from './ShopIt';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import ProductItem from "./ProductItem";
 
 class ProductFeed extends Component {
-render(){
-    const { product } = this.props;
-    return product.map(item => <ShopIt key={item._id} product={item} />)
-}
-
+  render() {
+    const { item } = this.props;
+    return item.map(product => (
+      <ProductItem key={product._id} item={product} />
+    ));
+  }
 }
 
 ProductFeed.propTypes = {
-    products: PropTypes.array.isRequired
-}
+  item: PropTypes.array.isRequired
+};
 
 export default ProductFeed;
