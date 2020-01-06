@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { getProducts } from "../../actions/productActions";
 import { Link } from "react-router-dom";
+import  ProductFeed  from './ProductFeed';
 
 class ShopIt extends Component {
   onLogoutClick = e => {
@@ -21,12 +22,16 @@ class ShopIt extends Component {
   };
 
   render() {
-    const { user } = this.props.auth;
-    const { products } = this.props.product;
+    const { auth, products } = this.props.product;
+    let content = <ProductFeed item={products} />
+
+
+    
     // const { errors } = this.props.errors;
     return (
-      <div className="row">
-        <div className="col s12 m2">
+      <div className="feed">
+        { content }
+        {/* <div className="col s12 m6">
           <div className="card">
             <div className="card-image">
               <Link to href="#">
@@ -35,15 +40,17 @@ class ShopIt extends Component {
                   alt=""
                 />
               </Link>
+              <h4 className="card-title">
+             
+              </h4>
             </div>
 
             <div className="card-content">
-              <h4 className="card-title">
-                <Link to="#">Item One</Link>
-              </h4>
             </div>
           </div>
-        </div>
+        </div> */}
+      
+      
       </div>
     );
   }
@@ -53,12 +60,16 @@ ShopIt.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   getProducts: PropTypes.func.isRequired,
   product: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
+  
+
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  product: state.product
+  product: state.product,
+
 });
 
 export default connect(mapStateToProps, { logoutUser, getProducts })(ShopIt);
