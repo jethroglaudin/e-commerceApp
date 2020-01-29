@@ -1,52 +1,49 @@
-// import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import PropTypes from "prop-types";
-// import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
+class ProductItem extends Component {
+  render() {
+    const { auth, item } = this.props;
 
-// class ProductItem extends Component {
-//     render(){
-//         const { auth, products } = this.props;
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col s4 card-container">
+            <div className="card medium">
+              <div className="card-image small">
+                <Link to href="#">
+                  <img src="https://place-hold.it/90x90" alt="" />
+                </Link>
+              </div>
+              <span className="card-title">{item.productName}</span>
 
-//         return(
-//            <div className="row">
-//         <div className="col s12 m6">
-//           <div className="card">
-//             <div className="card-image">
-//               <Link to href="#">
-//                 <img  
-//                   src="https://place-hold.it/100x100"
-//                   alt=""
-//                 />
-//               </Link>
-//               <h4 className="card-title">
-             
-//               </h4>
-//             </div>
+              <div className="card-content">
+                <h5>${item.price}</h5>
+                <p>{item.description}</p>
+              </div>
+              <div className="card-action">
+                <button type="submit" className="btn btn-dark">
+                  Add To Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-//             <div className="card-content">
-//             </div>
-//           </div>
-//         </div>
-      
-//       </div>
-//         )
+ProductItem.propTypes = {
+  auth: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired,
+  item: PropTypes.array.isRequired
+};
 
-//     }
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
-
-// }
-
-// ProductItem.propTypes = {
-//     auth: PropTypes.object.isRequired,
-//     product: PropTypes.object.isRequired
-//   };
-  
-//   const mapStateToProps = state => ({
-//     auth: state.auth
-//   });
-  
-//   export default connect(
-//     mapStateToProps,
-//     {  }
-//   )(ProductItem);
+export default connect(mapStateToProps, {})(ProductItem);
